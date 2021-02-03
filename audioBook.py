@@ -59,12 +59,14 @@ def chooseAudioBooks():
         clearCMD()
         i = 0
 
+        print('AudioBook', end='\n\n')
         print('Choose a book: ')
+        print('q: Return to Home Screen')
         for book in audioBooks:
             print(str(i)+': '+book)
             i = i+1
 
-        print('Enter the S.no of book, or q to go back to home screen')
+        print('Enter the S.no of book')
         a = input()
 
         if a.isnumeric():
@@ -81,23 +83,44 @@ def chooseAudioBooks():
 
         sleep(1)
 
-def runMain():
+def Settings():
     c = 1
-
     while c == 1:
-        print('Choose one among the following: ')
+        clearCMD()
+        print('Settings', end='\n\n')
+        print('Choose an option:')
+        print('q: Return to Home Screen')
         print('1: change voice to male')
         print('2: change voice to female')
-        print('3: Choose audiobook')
-        print('q: to quit')
+
         a = input()
 
         if a == '1':
             changeVoice('male')
         elif a == '2':
             changeVoice('female')
-        elif a == '3':
+        elif a == 'q':
+            c = 0
+        else:
+            print('Invalid option')
+
+        sleep(1)
+
+def runMain():
+    c = 1
+
+    while c == 1:
+        print('Home', end='\n\n')
+        print('Choose one among the following: ')
+        print('a: Choose audiobook')
+        print('s: Settings')
+        print('q: quit')
+        a = input()
+        
+        if a == 'a' or a == 'A':
             chooseAudioBooks()
+        elif a == 's' or a == 'S':
+            Settings()
         elif a == 'q' or a == 'Q':
             c = 0
             print('Ending Application')
