@@ -3,6 +3,20 @@ import PyPDF2
 from os import system, name
 from time import sleep
 from Settings import Settings 
+import os
+
+# Getting list of all pdfs from current directory #
+#---------------------------------------------------#
+allFiles = os.listdir('.') 
+
+audioBooks = []
+
+for file in allFiles:
+    if file[-4:] == '.pdf':
+        audioBooks.append(file)
+#---------------------------------------------------#
+
+engine = pyttsx3.init()
 
 def clearCMD(): 
     # for windows 
@@ -10,11 +24,7 @@ def clearCMD():
         _ = system('cls')
     # for mac and linux(here, os.name is 'posix') 
     else: 
-        _ = system('clear') 
-
-audioBooks = ['sample.pdf', 'sample2.pdf']
-
-engine = pyttsx3.init()
+        _ = system('clear')
 
 def playAudioBook(name):
     book = open(name,'rb')

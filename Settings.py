@@ -41,16 +41,29 @@ def changeVolume(val):
     engine.say('The quick brown fox jumped over the lazy dog.')
     engine.runAndWait()
 
+def resetToDefault():
+    engine.setProperty('rate', initialSpeed)
+    engine.setProperty('voice', male_voice)
+    engine.setProperty('volume', initialVolume)
+    print('Settings set to default values...')
+    engine.runAndWait()
+
 def Settings():
     c = 1
     while c == 1:
         clearCMD()
+
+        vc = 'female'
+        if engine.getProperty('voice') == male_voice:
+            vc = 'male'
+            
         print('Settings', end='\n\n')
         print('Choose an option:')
         print('q: Return to Home Screen')
-        print('s: change voice')
-        print('r: change speech rate')
-        print('v: change volume')
+        print('s: change voice, current voice is '+vc)
+        print('r: change speech rate, current speed is '+str(engine.getProperty('rate')/initialSpeed)+'X')
+        print('v: change volume, current volume is '+str(engine.getProperty('volume')*100/initialVolume)+'%')
+        print('x: reset to default')
 
         a = input()
 
@@ -85,6 +98,8 @@ def Settings():
         elif a == 'q' or a == 'Q':
             c = 0
             continue
+        elif a == 'x' or a == 'X':
+            resetToDefault()
         else:
             print('Invalid option')
 
